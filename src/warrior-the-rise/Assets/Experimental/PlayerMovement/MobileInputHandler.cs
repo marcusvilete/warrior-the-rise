@@ -33,52 +33,35 @@ public class MobileInputHandler : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (Mathf.Abs(joystick.Horizontal) > 0 || Mathf.Abs(joystick.Vertical) > 0)
+        float horizontal = 0f;
+        float vertical = 0f;
+
+        if (Mathf.Abs(joystick.Horizontal) > 0.3)
         {
+            horizontal = joystick.Horizontal;
+        }
 
+        if (Mathf.Abs(joystick.Vertical) > 0.3)
+        {
+            vertical = joystick.Vertical;
+        }
 
-            Vector3 v = new Vector3(joystick.Horizontal, joystick.Vertical, 0);
+        if (Mathf.Abs(horizontal) > 0 || Mathf.Abs(vertical) > 0)
+        {
+            Vector3 v = new Vector3(horizontal, vertical, 0);
 
             v *= movementSpeed * Time.deltaTime;
-
-
-
-            //newPos += toBeControlled.transform.position * movementSpeed * Time.deltaTime;
+            
             toBeControlled.transform.Translate(v);
 
             FixBounds(toBeControlled.transform.position);
-
-
-
-
-
-
-            //Vector3 newPos = toBeControlled.transform.position;
-            //newPos.x += (movementSpeed * Time.deltaTime * joystick.Horizontal);
-            //newPos.y += (movementSpeed * Time.deltaTime * joystick.Vertical);
-
-            //toBeControlled.transform.position = newPos;
         }
-        
 
-        
     }
 
     private void FixBounds(Vector3 position)
     {
-        //float playerSizeOffset = gameObject.transform.localScale.x / 2;
-
-        //if (position.x + playerSizeOffset > upperBound.x ||
-        //    position.y + playerSizeOffset > upperBound.y ||
-        //    position.x - playerSizeOffset < lowerBound.x ||
-        //    position.y - playerSizeOffset < lowerBound.y)
-        //{
-        //    return false;
-        //}
-
-        //return true;
-
-        float playerSizeOffset = toBeControlled.transform.localScale.x / 2;
+        float playerSizeOffset = toBeControlled.transform.lossyScale.x / 2;
 
         if (position.x + playerSizeOffset > upperBound.x)
         {
