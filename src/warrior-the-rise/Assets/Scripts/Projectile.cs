@@ -5,15 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float movespeed = 10;
-    void Awake()
-    {
-        rb.velocity = Vector2.up * movespeed;
-    }
+    public float movespeed;
 
-    // Update is called once per frame
-    void Update()
+    public void SetProjectileSpeed(float speed)
     {
-        
+        movespeed = speed;
+        rb.velocity = Vector2.up * movespeed;
     }
 }

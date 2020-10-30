@@ -25,7 +25,7 @@ public class LevelController : MonoBehaviour
 
         //
         //3- Spawn Player
-        SpawnPlayer();
+        //SpawnPlayer();
         //
 
         //

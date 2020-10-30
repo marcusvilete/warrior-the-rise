@@ -20,8 +20,6 @@ public class SpawnerHandler : MonoBehaviour
 
 
 
-
-
         //Placing spawnPoints
         Vector2 lowerBound = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         Vector2 upperBound = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
@@ -46,8 +44,6 @@ public class SpawnerHandler : MonoBehaviour
         if (timeToNextFire <= 0.0f)
         {   
             timeToNextFire = 1 / fireRate;
-
-            
 
 
             if (Random.Range(0, 10) > 3)
