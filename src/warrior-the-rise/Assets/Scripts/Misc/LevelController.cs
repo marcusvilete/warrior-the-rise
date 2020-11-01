@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,10 @@ public class LevelController : MonoBehaviour
 {
     public Camera cam;
     public Transform playableArea;
-    public Transform playerPrefab;
+    public Health playerPrefab;
+    public UIController uiPrefab;
+
+    private Health playerHealth;
 
     void Awake()
     {
@@ -28,11 +32,23 @@ public class LevelController : MonoBehaviour
         SpawnPlayer();
         //
 
+        //4- Initialize UI
+        InitializeUI();
+
+
         //
         //4- Load Level data
         LoadLevelData();
 
         //TODO: Set to playmode!
+    }
+
+    private void InitializeUI()
+    {
+        //Instantiate Health UI, bind events to the player
+        var ui = Instantiate(uiPrefab);
+        ui.UpdateHealthValue(playerHealth.CurrentHealth, playerHealth.CurrentHealth);
+        playerHealth.OnHealthChanged += ui.OnChangeHealth;
     }
 
     private void ForcePortrait()
@@ -57,7 +73,7 @@ public class LevelController : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        Instantiate(playerPrefab, playableArea);
+        playerHealth =  Instantiate(playerPrefab, playableArea);
     }
 
     
