@@ -9,9 +9,10 @@ public class LevelController : MonoBehaviour
     public Transform playableArea;
     public Health playerPrefab;
     public UIController uiPrefab;
+    
 
     private Health playerHealth;
-
+    private UIController uiController;
     void Awake()
     {
         //Setup the scene
@@ -27,28 +28,28 @@ public class LevelController : MonoBehaviour
         //2- Scale playable area
         ScalePlayableArea();
 
+        //3- Initialize UI
+        InitializeUI();
+
         //
-        //3- Spawn Player
+        //4- Spawn Player
         SpawnPlayer();
         //
 
-        //4- Initialize UI
-        InitializeUI();
-
+        
 
         //
-        //4- Load Level data
+        //5- Load Level data
         LoadLevelData();
+
+        
 
         //TODO: Set to playmode!
     }
 
     private void InitializeUI()
     {
-        //Instantiate Health UI, bind events to the player
-        var ui = Instantiate(uiPrefab);
-        ui.UpdateHealthValue(playerHealth.CurrentHealth, playerHealth.CurrentHealth);
-        playerHealth.OnHealthChanged += ui.OnChangeHealth;
+        uiController = Instantiate(uiPrefab);
     }
 
     private void ForcePortrait()
@@ -74,6 +75,8 @@ public class LevelController : MonoBehaviour
     private void SpawnPlayer()
     {
         playerHealth =  Instantiate(playerPrefab, playableArea);
+        uiController.UpdateHealthValue(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+        playerHealth.OnHealthChanged += uiController.OnChangeHealth;
     }
 
     

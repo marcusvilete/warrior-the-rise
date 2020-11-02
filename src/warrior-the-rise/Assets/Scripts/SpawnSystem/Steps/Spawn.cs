@@ -32,8 +32,10 @@ public class Spawn : ISpawnStep
                         system.Spawn(system.selectedProjectilePrefab, i);
                         break;
                     case 2: // collectible01?
+                        system.Spawn(system.healthCollectible, i);
                         break;
                     case 3: // collectible02?
+                        system.Spawn(system.shieldCollectible, i);
                         break;
                     case 4: // collectible03?
                         break;

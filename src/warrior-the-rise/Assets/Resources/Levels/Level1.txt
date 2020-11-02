@@ -1,7 +1,7 @@
 SetSpeed, 10
 SetProjectile, 0
-Spawn, 1 0 0 0 0 0 0 0
-Spawn, 0 1 0 0 0 0 0 0
+Spawn, 2 0 0 0 0 0 0 0
+Spawn, 0 3 0 0 0 3 0 0
 Spawn, 0 0 1 0 0 0 0 0
 Spawn, 0 0 0 0 0 0 0 1
 Pause, 10

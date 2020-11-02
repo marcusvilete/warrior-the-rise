@@ -22,6 +22,9 @@ public class SpawnSystem : MonoBehaviour
     public Projectile selectedProjectilePrefab;
     public Transform playableArea;
 
+    public Projectile shieldCollectible;
+    public Projectile healthCollectible;
+
 
     public event Action SpeedChanged;
     public event Action ProjectileChanged;

@@ -11,10 +11,11 @@ public class Health : MonoBehaviour
     [SerializeField]
     private float maxHealth;
 
-
     public float CurrentHealth { get; protected set; }
     public float MaxHealth { get { return maxHealth; } }
     public bool IsDead { get { return CurrentHealth <= 0f; } }
+
+    public bool CanBeDamaged = true;
 
     //Events
     public event Action<Health> OnDeath;
@@ -33,7 +34,11 @@ public class Health : MonoBehaviour
     public void TakeDamage(float health)
     {
         //TODO: Play hit particles?
-        ChangeHealth(-health);
+        //TODO: Should add a grace period?
+        if (CanBeDamaged)
+        {
+            ChangeHealth(-health);
+        }
     }
 
     public void ChangeHealth(float health)
@@ -57,6 +62,7 @@ public class Health : MonoBehaviour
         if (IsDead)
         {
             OnDeath?.Invoke(this);
+            //TODO: Should Destroy?
             Destroy(gameObject);
         }
     }
