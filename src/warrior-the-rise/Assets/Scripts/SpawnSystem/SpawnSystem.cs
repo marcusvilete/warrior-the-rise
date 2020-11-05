@@ -44,9 +44,6 @@ public class SpawnSystem : MonoBehaviour
         levelLoader = new LevelLoader();
         currentCountdown = TimeBetweenSteps;
         selectedProjectilePrefab = projectilePrefabs[0];
-
-        //xxx
-        LoadLevel("Level1");
     }
 
     private void SetupSteps()
@@ -64,7 +61,7 @@ public class SpawnSystem : MonoBehaviour
         levelLoader.ReadContent(level);
         LevelLoaded?.Invoke();
         //xxx
-        StartLevel();
+        //StartLevel();
     }
 
     public void StartLevel()

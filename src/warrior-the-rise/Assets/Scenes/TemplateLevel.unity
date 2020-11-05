@@ -211,6 +211,8 @@ MonoBehaviour:
     type: 3}
   uiPrefab: {fileID: 1087612429525131566, guid: 0d77840f7b957544bb1080c642c3b714,
     type: 3}
+  spawnSystem: {fileID: 40404246}
+  currentLevelState: 0
 --- !u!4 &875553443
 Transform:
   m_ObjectHideFlags: 0
