@@ -10,6 +10,8 @@ public class LevelController : MonoBehaviour
     public Health playerPrefab;
     public UIController uiPrefab;
     public SpawnSystem spawnSystem;
+    public BossEncounter bossEncounter;
+    public Boss bossPrefab;
 
 
     public LevelState currentLevelState;
@@ -117,8 +119,23 @@ public class LevelController : MonoBehaviour
     {
         //TODO: start boss encounter
         Debug.Log("Level Finished");
-        TogglePause();
-        uiController.ShowWinUI();
+
+        //cleanup
+        spawnSystem.LevelFinished -= SpawnSystem_LevelFinished;
+        spawnSystem.LevelLoaded -= SpawnSystem_LevelFinished;
+
+        SetupBoss();
+
+        //TogglePause();
+        //uiController.ShowWinUI();
+    }
+
+    private void SetupBoss()
+    {
+        var boss = Instantiate(bossPrefab, playableArea);
+
+        bossEncounter.StartEncounter(boss, spawnSystem);
+
     }
 
     public void TogglePause()

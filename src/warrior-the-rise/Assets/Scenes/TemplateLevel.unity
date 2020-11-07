@@ -155,6 +155,7 @@ MonoBehaviour:
   projectilePrefabs:
   - {fileID: 2183988443480534922, guid: fbb58727175890c4ab42f580d41d2ba0, type: 3}
   - {fileID: 5797285038100239762, guid: 78c30503d3364454f91e5690fbf06b13, type: 3}
+  - {fileID: 5797285038100239762, guid: 7f35a17e91549c04883375b9538de4d4, type: 3}
   selectedProjectilePrefab: {fileID: 3087422209782015639, guid: fbb58727175890c4ab42f580d41d2ba0,
     type: 3}
   playableArea: {fileID: 1573409639}
@@ -175,6 +176,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &366733005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366733007}
+  - component: {fileID: 366733006}
+  m_Layer: 0
+  m_Name: BossEncounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &366733006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366733005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eb817311c370b449081c167ae61ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 0}
+  spawnSystem: {fileID: 0}
+--- !u!4 &366733007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366733005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.6852736, y: -1.2807009, z: -15.724609}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &875553441
 GameObject:
@@ -212,6 +258,9 @@ MonoBehaviour:
   uiPrefab: {fileID: 1087612429525131566, guid: 0d77840f7b957544bb1080c642c3b714,
     type: 3}
   spawnSystem: {fileID: 40404246}
+  bossEncounter: {fileID: 366733006}
+  bossPrefab: {fileID: 4362852244118631704, guid: f2e92fae2abbbcf4193a4ce2f39e88e1,
+    type: 3}
   currentLevelState: 0
 --- !u!4 &875553443
 Transform:

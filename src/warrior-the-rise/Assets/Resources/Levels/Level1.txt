@@ -86,22 +86,4 @@ Spawn, 1 0 0 0 0 1 1 1
 Spawn, 1 1 0 0 0 0 1 1
 Spawn, 1 1 1 0 0 0 0 1
 Spawn, 1 1 1 1 0 0 0 0
-SetSpeed, 5
-SetProjectile, 1
-Spawn, 1 1 1 1 0 1 1 1
-Pause, 1
-Spawn, 1 1 1 0 0 1 1 1
-Spawn, 1 0 0 0 1 1 1 1
-Spawn, 1 0 1 1 1 1 1 1
-Spawn, 1 0 0 1 1 1 1 1
-Spawn, 1 1 0 0 1 1 1 1
-Spawn, 1 1 1 0 0 1 1 1
-Spawn, 1 1 1 1 0 1 1 1
-Spawn, 1 1 1 1 0 0 0 1
-Spawn, 1 1 1 1 0 1 0 1
-Spawn, 1 1 1 1 0 1 0 1
-Spawn, 1 0 0 0 0 1 0 1
-Spawn, 1 0 1 1 1 1 0 1
-Spawn, 1 0 1 1 1 1 0 1
-Spawn, 1 0 1 1 1 1 1 1
-Pause, 20
+Pause, 22
