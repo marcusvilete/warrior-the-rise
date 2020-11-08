@@ -26,14 +26,6 @@ public class BossEncounter : MonoBehaviour
         boss.BossIntro();
     }
 
-    
-
-    void SpawnBoss()
-    {
-        
-    }
-
-
     private void Boss_OnBossIntroFinished()
     {
         spawnSystem.LoadLevel($"Level1_Boss{waveCounter}");
@@ -42,6 +34,8 @@ public class BossEncounter : MonoBehaviour
 
     private void Boss_OnBossVulnerabilityFinished()
     {
+        Debug.Log("OnBossVulnerabilityFinished");
+
         waveCounter++;
 
         if (waveCounter > 4)
@@ -72,6 +66,7 @@ public class BossEncounter : MonoBehaviour
         //boss events
         boss.OnBossIntroFinished += Boss_OnBossIntroFinished;
         boss.OnBossVulnerabilityFinished += Boss_OnBossVulnerabilityFinished;
+        boss.OnBossDeath += Boss_OnBossDeath;
 
         //spawn system events
         spawnSystem.LevelLoaded += SpawnSystem_LevelLoaded;
@@ -79,5 +74,9 @@ public class BossEncounter : MonoBehaviour
 
     }
 
-
+    private void Boss_OnBossDeath()
+    {
+        //??
+        //See "Win/Lose" logic on level controller
+    }
 }

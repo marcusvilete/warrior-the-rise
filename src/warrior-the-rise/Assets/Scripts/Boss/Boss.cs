@@ -7,35 +7,45 @@ public class Boss : MonoBehaviour
 {
 
     Animator animator;
+    Health bossHealth;
 
     public event Action OnBossIntroFinished;
     public event Action OnBossVulnerabilityFinished;
+    public event Action OnBossDeath;
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        bossHealth = GetComponent<Health>();
+        bossHealth.OnDeath += BossHealth_OnDeath;
+    }
+
+    private void BossHealth_OnDeath(Health h)
+    {
+        OnBossDeath?.Invoke();
     }
 
     public void BossIntro()
     {
-        StartCoroutine(StartBossIntro());
+        StartCoroutine("StartBossIntro");
     }
 
     public void BecomeVulnerable()
     {
-        StartCoroutine(StartBossVulnerable());
+        StartCoroutine("StartBossVulnerable");
     }
 
 
     private IEnumerator StartBossVulnerable()
     {
+        bossHealth.CanBeDamaged = true;
         animator.Play("Vulnerable");
 
-        var x = animator.GetCurrentAnimatorStateInfo(0);
+        //TODO: change this so we dont get to hardcode de animation time here
+        yield return new WaitForSeconds(5f);
 
-        yield return new WaitForSeconds(x.length);
-
+        bossHealth.CanBeDamaged = false;
         OnBossVulnerabilityFinished?.Invoke();
     }
 
@@ -50,5 +60,34 @@ public class Boss : MonoBehaviour
         OnBossIntroFinished?.Invoke();
     }
 
+    private IEnumerator TakeDamage()
+    {
+        //Cancel `Vulnerability` state and start `Damaged` state
+        StopCoroutine("StartBossVulnerable");
+
+        bossHealth.TakeDamage(1);
+        bossHealth.CanBeDamaged = false;
+
+        animator.Play("Damaged");
+        
+        //TODO: change this so we dont get to hardcode de animation time here
+        yield return new WaitForSeconds(1.5f);
+
+        
+        //Finish Vulnerability
+        OnBossVulnerabilityFinished?.Invoke();
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.tag == "Player")
+        {
+            if (bossHealth.CanBeDamaged)
+            {
+                StartCoroutine("TakeDamage");
+            }
+        }
+    }
 
 }

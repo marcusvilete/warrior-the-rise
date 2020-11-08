@@ -100,6 +100,10 @@ public class SpawnSystem : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        isRunning = false;
+    }
 
     //Spawning
     private void SetupSpawners()

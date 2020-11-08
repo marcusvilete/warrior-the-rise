@@ -126,16 +126,21 @@ public class LevelController : MonoBehaviour
 
         SetupBoss();
 
-        //TogglePause();
-        //uiController.ShowWinUI();
+        
     }
 
     private void SetupBoss()
     {
         var boss = Instantiate(bossPrefab, playableArea);
-
+        boss.OnBossDeath += Boss_OnBossDeath;
         bossEncounter.StartEncounter(boss, spawnSystem);
 
+    }
+
+    private void Boss_OnBossDeath()
+    {
+        TogglePause();
+        uiController.ShowWinUI();
     }
 
     public void TogglePause()
