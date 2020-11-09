@@ -38,7 +38,7 @@ public class BossEncounter : MonoBehaviour
 
         waveCounter++;
 
-        if (waveCounter > 4)
+        if (waveCounter > 6)
         {
             //??
             //Do something here or just let a impossible wave of projectiles do the work?

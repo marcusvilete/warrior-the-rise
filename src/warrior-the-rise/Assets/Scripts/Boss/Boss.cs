@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-
+    public Transform bossIntroOverlayPrefab;
     Animator animator;
     Health bossHealth;
+
+    SpriteRenderer spriteRenderer;
 
     public event Action OnBossIntroFinished;
     public event Action OnBossVulnerabilityFinished;
@@ -16,9 +18,13 @@ public class Boss : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
         bossHealth = GetComponent<Health>();
         bossHealth.OnDeath += BossHealth_OnDeath;
+        animator.enabled = false;
+        spriteRenderer.enabled = false;
+
     }
 
     private void BossHealth_OnDeath(Health h)
@@ -39,6 +45,9 @@ public class Boss : MonoBehaviour
 
     private IEnumerator StartBossVulnerable()
     {
+        //Fade in
+        yield return Fade(spriteRenderer, 1.0f, 1.0f);
+
         bossHealth.CanBeDamaged = true;
         animator.Play("Vulnerable");
 
@@ -47,10 +56,23 @@ public class Boss : MonoBehaviour
 
         bossHealth.CanBeDamaged = false;
         OnBossVulnerabilityFinished?.Invoke();
+
+        //Fade out
+        yield return Fade(spriteRenderer, 0.0f, 1.0f);
     }
 
     private IEnumerator StartBossIntro()
     {
+        yield return new WaitForSeconds(2);
+
+        var introOverlay = Instantiate(bossIntroOverlayPrefab);
+
+        yield return new WaitForSeconds(4.217f);
+
+        Destroy(introOverlay.gameObject);
+
+        spriteRenderer.enabled = true;
+        animator.enabled = true;
         animator.Play("Intro");
 
         var x = animator.GetCurrentAnimatorStateInfo(0);
@@ -58,6 +80,11 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(x.length);
 
         OnBossIntroFinished?.Invoke();
+
+        //Fade out
+        yield return Fade(spriteRenderer, 0.0f, 1.0f);
+
+
     }
 
     private IEnumerator TakeDamage()
@@ -76,6 +103,20 @@ public class Boss : MonoBehaviour
         
         //Finish Vulnerability
         OnBossVulnerabilityFinished?.Invoke();
+
+        //Fade out
+        yield return Fade(spriteRenderer, 0.0f, 1.0f);
+    }
+
+    private IEnumerator Fade(SpriteRenderer sp, float aValue, float aTime)
+    {
+        float alpha = sp.color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+            sp.color = newColor;
+            yield return null;
+        }
     }
 
 
