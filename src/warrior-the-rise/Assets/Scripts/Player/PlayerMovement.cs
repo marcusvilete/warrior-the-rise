@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject toBeControlled;
     public float movementSpeed = 1f;
     private Joystick joystick;
+    Animator animator;
+
+
 
     private Vector2 upperBound;
     private Vector2 lowerBound;
@@ -18,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("[MobileInputHandler] toBeControlled is null!");
         }
+
+        animator = GetComponentInChildren<Animator>();
 
         //Look for a joystick in the scene
         joystick = FindObjectOfType<Joystick>();
@@ -88,6 +93,11 @@ public class PlayerMovement : MonoBehaviour
 
         toBeControlled.transform.position = position;
 
+    }
+
+    public void PlayAttackAnimation()
+    {
+        animator.Play("Attack");
     }
     
 }

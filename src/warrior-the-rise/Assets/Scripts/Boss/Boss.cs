@@ -126,9 +126,9 @@ public class Boss : MonoBehaviour
         {
             if (bossHealth.CanBeDamaged)
             {
+                c.GetComponent<PlayerMovement>().PlayAttackAnimation();
                 StartCoroutine("TakeDamage");
             }
         }
     }
-
 }
