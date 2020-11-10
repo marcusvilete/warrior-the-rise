@@ -102,7 +102,7 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         //Fade out
-        yield return Fade(spriteRenderer, 0.0f, 1.0f);
+        yield return Fade(spriteRenderer, 0.0f, 3.0f);
 
         //Finish Vulnerability
         OnBossVulnerabilityFinished?.Invoke();
