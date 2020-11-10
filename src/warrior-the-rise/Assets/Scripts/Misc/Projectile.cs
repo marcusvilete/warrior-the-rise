@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        yPositionToDestroy = Camera.main.orthographicSize * 1.2f;
+        yPositionToDestroy = -(Camera.main.orthographicSize * 1.2f);
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 
     private void HandleDestruction()
     {
-        if (transform.position.y >= yPositionToDestroy)
+        if (transform.position.y <= yPositionToDestroy)
         {
             //TODO: if poolable, return to pool
             Destroy(this.gameObject);
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
     public void SetProjectileSpeed(float speed)
     {
         movespeed = speed;
-        rb.velocity = Vector2.up * movespeed;
+        rb.velocity = Vector2.down * movespeed;
     }
 
     void OnTriggerEnter2D(Collider2D c)

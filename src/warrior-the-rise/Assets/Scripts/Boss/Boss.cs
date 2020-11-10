@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
     private IEnumerator StartBossVulnerable()
     {
         //Fade in
-        yield return Fade(spriteRenderer, 1.0f, 1.0f);
+        yield return Fade(spriteRenderer, 1.0f, 3.0f);
 
         bossHealth.CanBeDamaged = true;
         animator.Play("Vulnerable");
@@ -55,10 +55,12 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         bossHealth.CanBeDamaged = false;
-        OnBossVulnerabilityFinished?.Invoke();
 
         //Fade out
-        yield return Fade(spriteRenderer, 0.0f, 1.0f);
+        yield return Fade(spriteRenderer, 0.0f, 3.0f);
+
+
+        OnBossVulnerabilityFinished?.Invoke();
     }
 
     private IEnumerator StartBossIntro()
@@ -79,11 +81,10 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(x.length);
 
-        OnBossIntroFinished?.Invoke();
-
         //Fade out
-        yield return Fade(spriteRenderer, 0.0f, 1.0f);
+        yield return Fade(spriteRenderer, 0.0f, 3.0f);
 
+        OnBossIntroFinished?.Invoke();
 
     }
 
@@ -100,12 +101,11 @@ public class Boss : MonoBehaviour
         //TODO: change this so we dont get to hardcode de animation time here
         yield return new WaitForSeconds(1.5f);
 
-        
-        //Finish Vulnerability
-        OnBossVulnerabilityFinished?.Invoke();
-
         //Fade out
         yield return Fade(spriteRenderer, 0.0f, 1.0f);
+
+        //Finish Vulnerability
+        OnBossVulnerabilityFinished?.Invoke();
     }
 
     private IEnumerator Fade(SpriteRenderer sp, float aValue, float aTime)
@@ -115,7 +115,7 @@ public class Boss : MonoBehaviour
         {
             Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
             sp.color = newColor;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 

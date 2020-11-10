@@ -117,7 +117,7 @@ public class SpawnSystem : MonoBehaviour
         spawnPoints = new Vector3[8];
         for (int i = 0; i < 8; i++)
         {
-            spawnPoints[i] = new Vector3(lowerBound.x + (i * units) + (units / 2), -(2 + Camera.main.orthographicSize), 0);
+            spawnPoints[i] = new Vector3(lowerBound.x + (i * units) + (units / 2), (2 + Camera.main.orthographicSize), 0);
             //Debug.Log($"[x:{spawnPoints[i].x}], [y:{spawnPoints[i].y}]");
         }
     }

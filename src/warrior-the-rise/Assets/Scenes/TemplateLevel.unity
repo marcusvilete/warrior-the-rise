@@ -207,8 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: {fileID: 0}
-  bossIntroOverlay: {fileID: 4377196630003582436, guid: 633d920f20f211248bf2f82313f242b6,
-    type: 3}
   spawnSystem: {fileID: 0}
 --- !u!4 &366733007
 Transform:
