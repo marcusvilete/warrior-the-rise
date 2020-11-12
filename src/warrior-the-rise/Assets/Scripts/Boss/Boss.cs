@@ -13,7 +13,11 @@ public class Boss : MonoBehaviour
 
     public event Action OnBossIntroFinished;
     public event Action OnBossVulnerabilityFinished;
+    public event Action OnBossVulnerabilityFinishing;
+    public event Action OnBossVulnerabilityStarted;
     public event Action OnBossDeath;
+
+    public RotatingProjectile rotatingProjectilePrefab;
 
 
     private void Awake()
@@ -45,6 +49,9 @@ public class Boss : MonoBehaviour
 
     private IEnumerator StartBossVulnerable()
     {
+
+        OnBossVulnerabilityStarted?.Invoke();
+
         //Fade in
         yield return Fade(spriteRenderer, 1.0f, 3.0f);
 
@@ -52,9 +59,11 @@ public class Boss : MonoBehaviour
         animator.Play("Vulnerable");
 
         //TODO: change this so we dont get to hardcode de animation time here
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(11.6f);
 
         bossHealth.CanBeDamaged = false;
+
+        OnBossVulnerabilityFinishing?.Invoke();
 
         //Fade out
         yield return Fade(spriteRenderer, 0.0f, 3.0f);
@@ -97,9 +106,12 @@ public class Boss : MonoBehaviour
         bossHealth.CanBeDamaged = false;
 
         animator.Play("Damaged");
-        
+
+        OnBossVulnerabilityFinishing?.Invoke();
         //TODO: change this so we dont get to hardcode de animation time here
         yield return new WaitForSeconds(1.5f);
+
+        
 
         //Fade out
         yield return Fade(spriteRenderer, 0.0f, 3.0f);

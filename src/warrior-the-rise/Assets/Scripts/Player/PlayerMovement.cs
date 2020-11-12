@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 1f;
     private Joystick joystick;
     Animator animator;
+    private bool movementEnabled;
 
-
+    Health health;
 
     private Vector2 upperBound;
     private Vector2 lowerBound;
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator = GetComponentInChildren<Animator>();
-
+        health = GetComponent<Health>();
         //Look for a joystick in the scene
         joystick = FindObjectOfType<Joystick>();
 
@@ -34,12 +35,13 @@ public class PlayerMovement : MonoBehaviour
 
         upperBound = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
         lowerBound = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-
+        movementEnabled = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!movementEnabled) return;
 
         float horizontal = 0f;
         float vertical = 0f;
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 v = new Vector3(horizontal, vertical, 0);
 
             v *= movementSpeed * Time.deltaTime;
-            
+
             toBeControlled.transform.Translate(v);
 
             FixBounds(toBeControlled.transform.position);
@@ -99,5 +101,40 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.Play("Attack");
     }
-    
+
+    public void DisableMovement()
+    {
+        movementEnabled = false;
+    }
+
+    public void EnableMovement()
+    {
+        movementEnabled = true;
+    }
+
+    public void ResetPosition()
+    {
+        //TODO: animate?
+
+        //transform.position = new Vector3(0, -6, 0);
+
+        StartCoroutine(MoveTowards(transform, transform.position, new Vector3(0, -6, 0), 0.3f));
+    }
+
+    IEnumerator MoveTowards(Transform tr, Vector3 from, Vector3 to, float aTime)
+    {
+        DisableMovement();
+
+        health.CanBeDamaged = false;
+
+        for (float t = 0.0f; t < 1; t += (Time.deltaTime / aTime))
+        {
+            tr.position = Vector3.Lerp(from, to, t);
+            yield return new WaitForEndOfFrame();
+        }
+        
+        EnableMovement();
+        health.CanBeDamaged = true;
+    }
+
 }
