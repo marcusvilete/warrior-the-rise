@@ -9,6 +9,7 @@ public class RotatingProjectile : MonoBehaviour
     float speed;
     bool isRunning = false;
     Boss bossRef;
+    public float damage;
 
     void Update()
     {
@@ -58,6 +59,13 @@ public class RotatingProjectile : MonoBehaviour
         bossRef.OnBossVulnerabilityFinishing -= this.Destroy;
 
         StartCoroutine(DestroyCoroutine());
-        
+    }
+
+    void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.tag == "Player")
+        {
+            c.GetComponent<Player>().TakeDamage(damage);
+        }
     }
 }

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 99
   maxHealth: 99
+  gracePeriod: 1
   CanBeDamaged: 1
 --- !u!61 &159706047438492027
 BoxCollider2D:

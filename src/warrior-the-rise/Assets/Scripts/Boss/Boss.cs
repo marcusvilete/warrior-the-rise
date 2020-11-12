@@ -18,10 +18,12 @@ public class Boss : MonoBehaviour
     public event Action OnBossDeath;
 
     public RotatingProjectile rotatingProjectilePrefab;
+    public BackgroundController bgController;
 
 
     private void Awake()
     {
+        bgController = FindObjectOfType<BackgroundController>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
         bossHealth = GetComponent<Health>();
@@ -74,11 +76,15 @@ public class Boss : MonoBehaviour
 
     private IEnumerator StartBossIntro()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         var introOverlay = Instantiate(bossIntroOverlayPrefab);
 
-        yield return new WaitForSeconds(4.217f);
+        yield return new WaitForSeconds(2.108f);
+
+        bgController.setBossBackground();
+
+        yield return new WaitForSeconds(2.109f);
 
         Destroy(introOverlay.gameObject);
 
@@ -138,7 +144,7 @@ public class Boss : MonoBehaviour
         {
             if (bossHealth.CanBeDamaged)
             {
-                c.GetComponent<PlayerMovement>().PlayAttackAnimation();
+                c.GetComponent<Player>().PlayAttackAnimation();
                 StartCoroutine("TakeDamage");
             }
         }

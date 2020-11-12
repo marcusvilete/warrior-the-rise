@@ -6,17 +6,20 @@ using UnityEngine;
 public class BossEncounter : MonoBehaviour
 {
     public Boss boss;
-    public PlayerMovement player;
+    public Player player;
     public SpawnSystem spawnSystem;
-    public RotatingProjectile rotatingProjectilePrefab; 
+    public RotatingProjectile rotatingProjectilePrefab;
+    public Transform playableArea;
+    public BackgroundController bgController;
     int waveCounter;
 
-    public void StartEncounter(Boss boss, SpawnSystem spawnSystem)
+    public void StartEncounter(Boss boss, SpawnSystem spawnSystem, Transform playableArea)
     {
         waveCounter = 1;
         this.spawnSystem = spawnSystem;
         this.boss = boss;
-        player = FindObjectOfType<PlayerMovement>();
+        this.playableArea = playableArea;
+        player = FindObjectOfType<Player>();
 
         SetupEventHandlers();
         BossIntro();
@@ -26,10 +29,14 @@ public class BossEncounter : MonoBehaviour
     void BossIntro()
     {
         boss.BossIntro();
+        player.DisableMovement();
+        player.ResetPosition(false);
+        
     }
 
     private void Boss_OnBossIntroFinished()
     {
+        player.EnableMovement();
         spawnSystem.LoadLevel($"Level1_Boss{waveCounter}");
         
     }
@@ -80,13 +87,13 @@ public class BossEncounter : MonoBehaviour
 
     private void Boss_OnBossVulnerabilityFinishing()
     {
-        player.ResetPosition();
+        player.ResetPosition(true);
     }
 
     private void Boss_OnBossVulnerabilityStarted()
     {
         player.DisableMovement();
-        player.ResetPosition();
+        player.ResetPosition(false);
         
         SpawnRingOfProjectiles(3, 10, Vector3.left, 2);
         SpawnRingOfProjectiles(6, 20, Vector3.right, 3);
@@ -104,7 +111,7 @@ public class BossEncounter : MonoBehaviour
     {
         int holeCount = 1;
         float angleStep = 360 / (float)amount;
-        Vector3 position = new Vector3(0, distance);
+        Vector3 position = new Vector3(0, boss.transform.position.y + distance);
 
         int holeStep = amount / holes;
 
@@ -119,8 +126,8 @@ public class BossEncounter : MonoBehaviour
                 }
             }
 
-            var proj = Instantiate(boss.rotatingProjectilePrefab, boss.transform);
-            proj.transform.localPosition = position;
+            var proj = Instantiate(boss.rotatingProjectilePrefab, playableArea);
+            proj.transform.position = position;
             proj.transform.RotateAround(boss.transform.position, Vector3.forward, i * angleStep);
 
             //When vulnerability is done, we self destroy

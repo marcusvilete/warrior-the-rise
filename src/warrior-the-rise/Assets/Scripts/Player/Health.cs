@@ -11,6 +11,10 @@ public class Health : MonoBehaviour
     [SerializeField]
     private float maxHealth;
 
+    //Amount of time in seconds to be invulnerable after taking damage;
+    [SerializeField]
+    private float gracePeriod;
+
     public float CurrentHealth { get; protected set; }
     public float MaxHealth { get { return maxHealth; } }
     public bool IsDead { get { return CurrentHealth <= 0f; } }
@@ -38,6 +42,7 @@ public class Health : MonoBehaviour
         if (CanBeDamaged)
         {
             ChangeHealth(-health);
+            StartCoroutine(StartGracePeriod());
         }
     }
 
@@ -65,5 +70,12 @@ public class Health : MonoBehaviour
             //TODO: Should Destroy?
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator StartGracePeriod()
+    {
+        CanBeDamaged = false;
+        yield return new WaitForSeconds(gracePeriod);
+        CanBeDamaged = true;
     }
 }

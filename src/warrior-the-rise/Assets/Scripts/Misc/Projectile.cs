@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
         if (c.tag == "Player")
         {
             //TODO: what do we do with projectile? explode? destroy? keep going?
-            c.GetComponent<Health>().TakeDamage(damage);
+            c.GetComponent<Player>().TakeDamage(damage);
         }
     }
 }

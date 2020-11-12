@@ -13,7 +13,6 @@ public class LevelController : MonoBehaviour
     public BossEncounter bossEncounter;
     public Boss bossPrefab;
 
-
     public LevelState currentLevelState;
     public event Action<LevelState> GameStateChanged;
 
@@ -133,8 +132,7 @@ public class LevelController : MonoBehaviour
     {
         var boss = Instantiate(bossPrefab, playableArea);
         boss.OnBossDeath += Boss_OnBossDeath;
-        bossEncounter.StartEncounter(boss, spawnSystem);
-
+        bossEncounter.StartEncounter(boss, spawnSystem, playableArea);
     }
 
     private void Boss_OnBossDeath()

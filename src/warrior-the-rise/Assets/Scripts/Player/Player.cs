@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject toBeControlled;
     public float movementSpeed = 1f;
@@ -97,10 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void PlayAttackAnimation()
-    {
-        animator.Play("Attack");
-    }
+    
 
     public void DisableMovement()
     {
@@ -112,18 +109,19 @@ public class PlayerMovement : MonoBehaviour
         movementEnabled = true;
     }
 
-    public void ResetPosition()
+    public void ResetPosition(bool shouldDisableMovement)
     {
         //TODO: animate?
 
         //transform.position = new Vector3(0, -6, 0);
 
-        StartCoroutine(MoveTowards(transform, transform.position, new Vector3(0, -6, 0), 0.3f));
+        StartCoroutine(MoveTowards(transform, transform.position, new Vector3(0, -6, 0), 0.3f, shouldDisableMovement));
     }
 
-    IEnumerator MoveTowards(Transform tr, Vector3 from, Vector3 to, float aTime)
+    IEnumerator MoveTowards(Transform tr, Vector3 from, Vector3 to, float aTime, bool shouldDisableMovement)
     {
-        DisableMovement();
+
+        if (shouldDisableMovement) DisableMovement();
 
         health.CanBeDamaged = false;
 
@@ -132,9 +130,28 @@ public class PlayerMovement : MonoBehaviour
             tr.position = Vector3.Lerp(from, to, t);
             yield return new WaitForEndOfFrame();
         }
-        
-        EnableMovement();
+
+        if (shouldDisableMovement)  EnableMovement();
         health.CanBeDamaged = true;
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (health.CanBeDamaged && amount > 0f )
+        {
+            animator.Play("Damaged");
+            health.TakeDamage(amount);
+        }
+        
+    }
+    public void PlayAttackAnimation()
+    {
+        animator.Play("Attack");
+    }
+
+    private void PlayDamageTakenAnimation()
+    {
+        animator.Play("Damaged");
     }
 
 }
