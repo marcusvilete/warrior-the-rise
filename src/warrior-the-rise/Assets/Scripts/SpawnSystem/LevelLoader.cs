@@ -30,6 +30,7 @@ public class LevelLoader
     {
         if (stepIndex < content.Length)
         {
+            Debug.Log($"Linha: {stepIndex}");
             var line = content[stepIndex].Split(new []{ "," }, StringSplitOptions.RemoveEmptyEntries);
             step = line[0];
             args = line[1];

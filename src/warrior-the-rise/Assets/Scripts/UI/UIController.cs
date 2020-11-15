@@ -12,19 +12,45 @@ public class UIController : MonoBehaviour
     public GameObject winUI;
     public GameObject loseUI;
 
+    public Image[] playerHealthBar;
+    public Image[] bossHealthBar;
+
     void Awake()
     {
         levelController = FindObjectOfType<LevelController>();
+
+        foreach (Image img in playerHealthBar)
+        {
+            img.enabled = false;
+        }
+
+        foreach (Image img in bossHealthBar)
+        {
+            img.enabled = false;
+        }
     }
 
-    public void OnChangeHealth(HealthChangedData data)
+    public void OnPlayerHealthChanged(HealthChangedData data)
     {
-        UpdateHealthValue(data.newHealth, data.maxHealth);
+        UpdateHealthValue(data.newHealth, data.maxHealth, playerHealthBar);
     }
 
-    public void UpdateHealthValue(float newValue, float maxHealth)
+    public void OnBossHealthChanged(HealthChangedData data)
     {
-        Lives.text = $"Lives: {newValue.ToString("00")}/{maxHealth.ToString("00")}";
+        UpdateHealthValue(data.newHealth, data.maxHealth, bossHealthBar);
+    }
+
+    public void UpdateHealthValue(float newValue, float maxHealth, Image[] healthBar)
+    {
+        //Lives.text = $"Lives: {newValue.ToString("00")}/{maxHealth.ToString("00")}";
+
+        for (int i = 0; i < healthBar.Length; i++)
+        {
+            healthBar[i].enabled = i < newValue;
+            
+        }
+        
+        
     }
 
     public void PauseClick()

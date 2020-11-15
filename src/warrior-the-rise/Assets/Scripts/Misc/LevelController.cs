@@ -89,8 +89,8 @@ public class LevelController : MonoBehaviour
     private void SpawnPlayer()
     {
         playerHealth = Instantiate(playerPrefab, playableArea);
-        uiController.UpdateHealthValue(playerHealth.CurrentHealth, playerHealth.MaxHealth);
-        playerHealth.OnHealthChanged += uiController.OnChangeHealth;
+        uiController.OnPlayerHealthChanged( new HealthChangedData {newHealth = playerHealth.CurrentHealth, maxHealth = playerHealth.MaxHealth });
+        playerHealth.OnHealthChanged += uiController.OnPlayerHealthChanged;
         playerHealth.OnDeath += PlayerHealth_OnDeath;
     }
 
@@ -131,8 +131,14 @@ public class LevelController : MonoBehaviour
     private void SetupBoss()
     {
         var boss = Instantiate(bossPrefab, playableArea);
+        var bossHealth = boss.GetComponent<Health>();
+
         boss.OnBossDeath += Boss_OnBossDeath;
-        bossEncounter.StartEncounter(boss, spawnSystem, playableArea);
+        uiController.OnBossHealthChanged(new HealthChangedData {maxHealth = bossHealth.MaxHealth, newHealth = bossHealth.CurrentHealth });
+        bossHealth.OnHealthChanged += uiController.OnBossHealthChanged;
+        bossEncounter.StartEncounter(boss, spawnSystem, playableArea, uiController);
+        
+
     }
 
     private void Boss_OnBossDeath()

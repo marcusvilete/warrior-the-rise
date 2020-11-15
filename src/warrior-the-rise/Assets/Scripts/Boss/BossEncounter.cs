@@ -11,14 +11,16 @@ public class BossEncounter : MonoBehaviour
     public RotatingProjectile rotatingProjectilePrefab;
     public Transform playableArea;
     public BackgroundController bgController;
+    public UIController uiController;
     int waveCounter;
 
-    public void StartEncounter(Boss boss, SpawnSystem spawnSystem, Transform playableArea)
+    public void StartEncounter(Boss boss, SpawnSystem spawnSystem, Transform playableArea, UIController uiController)
     {
         waveCounter = 1;
         this.spawnSystem = spawnSystem;
         this.boss = boss;
         this.playableArea = playableArea;
+        this.uiController = uiController;
         player = FindObjectOfType<Player>();
 
         SetupEventHandlers();
@@ -29,6 +31,7 @@ public class BossEncounter : MonoBehaviour
     void BossIntro()
     {
         boss.BossIntro();
+        uiController.gameObject.SetActive(false);
         player.DisableMovement();
         player.ResetPosition(false);
         
@@ -37,6 +40,7 @@ public class BossEncounter : MonoBehaviour
     private void Boss_OnBossIntroFinished()
     {
         player.EnableMovement();
+        uiController.gameObject.SetActive(true);
         spawnSystem.LoadLevel($"Level1_Boss{waveCounter}");
         
     }

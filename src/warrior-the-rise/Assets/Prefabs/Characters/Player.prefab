@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c9da35f0c8bc4442ad16b86b3c80870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 99
-  maxHealth: 99
+  startingHealth: 3
+  maxHealth: 5
   gracePeriod: 1
   CanBeDamaged: 1
 --- !u!61 &159706047438492027

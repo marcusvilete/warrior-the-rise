@@ -52,6 +52,7 @@ MonoBehaviour:
     type: 3}
   rotatingProjectilePrefab: {fileID: 6980975907202205174, guid: f7e307ec98aebce4a81fb88513609b41,
     type: 3}
+  bgController: {fileID: 0}
 --- !u!95 &6194764144534397525
 Animator:
   serializedVersion: 3
@@ -85,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   maxHealth: 3
+  gracePeriod: 1
   CanBeDamaged: 0
 --- !u!61 &6689465472901111292
 BoxCollider2D:
