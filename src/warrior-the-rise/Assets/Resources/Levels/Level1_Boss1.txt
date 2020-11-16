@@ -1,4 +1,4 @@
-SetSpeed, 8
+SetSpeed, 10
 SetProjectile, 1
 Spawn, 1 1 1 0 0 1 1 1
 Spawn, 1 1 1 0 0 1 1 1

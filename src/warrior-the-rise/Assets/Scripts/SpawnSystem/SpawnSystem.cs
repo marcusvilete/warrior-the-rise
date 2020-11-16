@@ -9,7 +9,7 @@ using UnityEngine;
 public class SpawnSystem : MonoBehaviour
 {
     public float speed = 10f;
-    public float TimeBetweenSteps { get { return 1 / speed; } }
+    public float TimeBetweenSteps { get { return 2f / speed; } }
     public float currentCountdown;
     private bool isRunning = false;
 
