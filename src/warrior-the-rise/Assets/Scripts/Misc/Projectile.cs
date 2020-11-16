@@ -42,6 +42,8 @@ public class Projectile : MonoBehaviour
         {
             //TODO: what do we do with projectile? explode? destroy? keep going?
             c.GetComponent<Player>().TakeDamage(damage);
+            Destroy(this.gameObject);
         }
+        
     }
 }

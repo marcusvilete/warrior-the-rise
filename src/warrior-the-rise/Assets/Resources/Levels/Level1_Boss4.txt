@@ -34,5 +34,9 @@ Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1
+Spawn, 1 1 1 1 1 1 1 1
+Spawn, 1 1 1 1 1 1 1 1
+Spawn, 1 1 1 1 1 1 1 1
+Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 2
 Pause, 16

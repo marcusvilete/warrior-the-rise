@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    SpriteRenderer spRenderer;
+    public SpriteRenderer[] spRenderers;
 
-    private void Awake()
-    {
-        spRenderer = GetComponent<SpriteRenderer>();
-    }
 
     public void setBossBackground()
     {
-        spRenderer.material.color = new Color(159 / 255f, 39 / 255f, 38 / 255f, 1);
+
+        foreach (SpriteRenderer spRenderer in spRenderers)
+        {
+            //spRenderer.material.color = new Color(159 / 255f, 39 / 255f, 38 / 255f, 1);
+            spRenderer.material.color = new Color(255 / 255f, 77 / 255f, 73 / 255f, 1);
+        }
+
+        
     }
 }

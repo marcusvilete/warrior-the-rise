@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    public SpriteRenderer shieldRenderer;
     public GameObject toBeControlled;
     public float movementSpeed = 1f;
     private Joystick joystick;
@@ -66,7 +67,6 @@ public class Player : MonoBehaviour
 
             FixBounds(toBeControlled.transform.position);
         }
-
     }
 
     private void FixBounds(Vector3 position)

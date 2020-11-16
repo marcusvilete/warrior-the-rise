@@ -6,18 +6,22 @@ public class Shield : PowerUp
 {
     public float invulnerabilityTimeInSeconds;
     private Health healthComponent;
+    private Player playerComponent;
     bool isApplied;
 
     public override void Apply()
     {
         healthComponent = GetComponent<Health>();
         healthComponent.CanBeDamaged = false;
+        playerComponent = GetComponent<Player>();
+        playerComponent.shieldRenderer.enabled = true;
         isApplied = true;
     }
 
     public override void Remove()
     {
         healthComponent.CanBeDamaged = true;
+        playerComponent.shieldRenderer.enabled = false;
         Destroy(this);
     }
 
