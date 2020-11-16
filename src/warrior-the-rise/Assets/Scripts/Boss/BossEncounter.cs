@@ -99,9 +99,9 @@ public class BossEncounter : MonoBehaviour
         player.DisableMovement();
         player.ResetPosition(false);
         
-        SpawnRingOfProjectiles(3, 10, Vector3.left, 2);
-        SpawnRingOfProjectiles(6, 20, Vector3.right, 3);
-        SpawnRingOfProjectiles(9, 30, Vector3.left, 4);
+        SpawnRingOfProjectiles(3, 15, Vector3.left, 2);
+        SpawnRingOfProjectiles(6, 30, Vector3.right, 3);
+        SpawnRingOfProjectiles(9, 45, Vector3.left, 4);
         player.EnableMovement();
     }
 

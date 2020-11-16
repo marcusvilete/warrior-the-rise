@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossIntroOverlayPrefab: {fileID: 4377196630003582436, guid: 633d920f20f211248bf2f82313f242b6,
     type: 3}
-  rotatingProjectilePrefab: {fileID: 6980975907202205174, guid: f7e307ec98aebce4a81fb88513609b41,
+  rotatingProjectilePrefab: {fileID: 6980975907202205174, guid: 72c3694248777c645bc6a58dedb91e5d,
     type: 3}
   bgController: {fileID: 0}
 --- !u!95 &6194764144534397525
