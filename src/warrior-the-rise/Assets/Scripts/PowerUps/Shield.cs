@@ -6,11 +6,13 @@ public class Shield : PowerUp
 {
     public float invulnerabilityTimeInSeconds;
     private Health healthComponent;
+    bool isApplied;
 
     public override void Apply()
     {
         healthComponent = GetComponent<Health>();
         healthComponent.CanBeDamaged = false;
+        isApplied = true;
     }
 
     public override void Remove()
@@ -24,5 +26,10 @@ public class Shield : PowerUp
         Apply();
         yield return new WaitForSeconds(invulnerabilityTimeInSeconds);
         Remove();
+    }
+
+    private void Update()
+    {
+        healthComponent.CanBeDamaged = false;
     }
 }

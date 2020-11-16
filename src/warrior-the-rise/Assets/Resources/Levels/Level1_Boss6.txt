@@ -1,6 +1,5 @@
-SetSpeed, 14
+SetSpeed, 12
 SetProjectile, 2
-Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1
 Spawn, 1 1 1 1 1 1 1 1

@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 6437473338753420984}
   movespeed: 5
-  damage: 2
+  damage: 1
 --- !u!1 &3573220026145525626
 GameObject:
   m_ObjectHideFlags: 0

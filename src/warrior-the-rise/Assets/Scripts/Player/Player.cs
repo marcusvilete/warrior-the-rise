@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         health = GetComponent<Health>();
         //Look for a joystick in the scene
         joystick = FindObjectOfType<Joystick>();
-
+        
         if (joystick == null)
         {
             Debug.LogError("[MobileInputHandler] joystrick is null!");
@@ -46,12 +46,12 @@ public class Player : MonoBehaviour
         float horizontal = 0f;
         float vertical = 0f;
 
-        if (Mathf.Abs(joystick.Horizontal) > 0.3)
+        if (Mathf.Abs(joystick.Horizontal) > 0.2)
         {
             horizontal = joystick.Horizontal;
         }
 
-        if (Mathf.Abs(joystick.Vertical) > 0.3)
+        if (Mathf.Abs(joystick.Vertical) > 0.2)
         {
             vertical = joystick.Vertical;
         }
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 
         //transform.position = new Vector3(0, -6, 0);
 
-        StartCoroutine(MoveTowards(transform, transform.position, new Vector3(0, -6, 0), 0.3f, shouldDisableMovement));
+        StartCoroutine(MoveTowards(transform, transform.position, new Vector3(0, -6, 0), 0.75f, shouldDisableMovement));
     }
 
     IEnumerator MoveTowards(Transform tr, Vector3 from, Vector3 to, float aTime, bool shouldDisableMovement)
