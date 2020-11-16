@@ -154,8 +154,8 @@ MonoBehaviour:
   currentCountdown: 0
   projectilePrefabs:
   - {fileID: 2183988443480534922, guid: fbb58727175890c4ab42f580d41d2ba0, type: 3}
-  - {fileID: 5797285038100239762, guid: 78c30503d3364454f91e5690fbf06b13, type: 3}
-  - {fileID: 5797285038100239762, guid: 7f35a17e91549c04883375b9538de4d4, type: 3}
+  - {fileID: 2183988443480534922, guid: 5d112bdb86ae57c4aada8b78dd04369b, type: 3}
+  - {fileID: 2183988443480534922, guid: 7ccb556505658cd46ad50fda457d0aaa, type: 3}
   selectedProjectilePrefab: {fileID: 3087422209782015639, guid: fbb58727175890c4ab42f580d41d2ba0,
     type: 3}
   playableArea: {fileID: 1573409639}
